@@ -1,58 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
     <style>
-        input[type="button"] {
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        #calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        #display {
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
             width: 50px;
             height: 50px;
-            font-size: 20px;
+            font-size: 18px;
+            margin: 5px;
+            padding: 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            cursor: pointer;
         }
-        #result {
-            width: 212px;
-            height: 50px;
-            font-size: 20px;
-            text-align: right;
+        button:hover {
+            background-color: #d0d0d0;
+        }
+        button.operator {
+            background-color: #667eea;
+            color: white;
+        }
+        button.operator:hover {
+            background-color: #5568d3;
+        }
+        button.equals {
+            background-color: #27ae60;
+            color: white;
+        }
+        button.equals:hover {
+            background-color: #229954;
         }
     </style>
 </head>
 <body>
-    <h2>Simple Calculator</h2>
-    <input type="text" id="result" disabled />
-    <br/>
-    <input type="button" value="1" onclick="appendToResult('1')" />
-    <input type="button" value="2" onclick="appendToResult('2')" />
-    <input type="button" value="3" onclick="appendToResult('3')" />
-    <input type="button" value="+" onclick="appendToResult('+')" />
-    <br/>
-    <input type="button" value="4" onclick="appendToResult('4')" />
-    <input type="button" value="5" onclick="appendToResult('5')" />
-    <input type="button" value="6" onclick="appendToResult('6')" />
-    <input type="button" value="-" onclick="appendToResult('-')" />
-    <br/>
-    <input type="button" value="7" onclick="appendToResult('7')" />
-    <input type="button" value="8" onclick="appendToResult('8')" />
-    <input type="button" value="9" onclick="appendToResult('9')" />
-    <input type="button" value="*" onclick="appendToResult('*')" />
-    <br/>
-    <input type="button" value="0" onclick="appendToResult('0')" />
-    <input type="button" value="C" onclick="clearResult()" />
-    <input type="button" value="=" onclick="calculateResult()" />
-    <input type="button" value="/" onclick="appendToResult('/')" />
-
+    <div id="calculator">
+        <input type="text" id="display" disabled />
+        <br />
+        <button onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="appendToDisplay('/')">/</button>
+        <button class="operator" onclick="appendToDisplay('*')">*</button>
+        <button class="operator" onclick="appendToDisplay('-')">-</button>
+        <br />
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="operator" onclick="appendToDisplay('+')">+</button>
+        <br />
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <br />
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <br />
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button class="equals" onclick="calculateResult()">=</button>
+    </div>
     <script>
-        function appendToResult(value) {
-            document.getElementById('result').value += value;
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
         }
-        function clearResult() {
-            document.getElementById('result').value = '';
+        function clearDisplay() {
+            document.getElementById('display').value = '';
         }
         function calculateResult() {
             try {
-                var result = eval(document.getElementById('result').value);
-                document.getElementById('result').value = result;
+                var result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
             } catch (e) {
-                document.getElementById('result').value = 'Error';
+                document.getElementById('display').value = 'Error';
             }
         }
     </script>
